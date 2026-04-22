@@ -1,1 +1,243 @@
-# tomanshi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cinematic Apology</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background: radial-gradient(circle at center, #ffe0ea, #e4c1f9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Quicksand', sans-serif;
+}
+
+/* 🎬 INTRO */
+.intro {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: introFade 4s forwards;
+}
+
+.intro-text {
+    color: white;
+    font-size: 28px;
+    letter-spacing: 3px;
+    opacity: 0;
+    animation: textReveal 3s forwards;
+}
+
+@keyframes textReveal {
+    0% {opacity:0; transform: scale(0.8);}
+    50% {opacity:1;}
+    100% {opacity:0; transform: scale(1.2);}
+}
+
+@keyframes introFade {
+    0% {opacity:1;}
+    80% {opacity:1;}
+    100% {opacity:0; visibility:hidden;}
+}
+
+/* spotlight */
+.spotlight {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.4), transparent 70%);
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: moveLight 6s infinite alternate ease-in-out;
+}
+
+@keyframes moveLight {
+    from { transform: translate(-60px, -40px); }
+    to { transform: translate(60px, 40px); }
+}
+
+/* container */
+.container {
+    position: relative;
+    perspective: 1200px;
+}
+
+/* envelope */
+.envelope {
+    width: 260px;
+    height: 170px;
+    background: linear-gradient(145deg, #ffffff, #f3f3f3);
+    border-radius: 14px;
+    position: relative;
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.25),
+        inset 0 3px 8px rgba(255,255,255,0.8);
+    cursor: pointer;
+    transition: 1s;
+}
+
+/* flap */
+.flap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #ff8fab, #ff6f91);
+    clip-path: polygon(0 0, 100% 0, 50% 65%);
+    transform-origin: top;
+    transition: 1s ease;
+}
+
+/* letter */
+.letter {
+    position: absolute;
+    width: 290px;
+    height: 380px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-radius: 18px;
+    padding: 25px;
+    top: 20px;
+    left: -15px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+    transform: translateY(120px) scale(0.85);
+    opacity: 0;
+    transition: 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.letter h2 {
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    font-size: 32px;
+    color: #ff4d6d;
+    margin-bottom: 15px;
+}
+
+.letter p {
+    font-size: 15px;
+    line-height: 1.7;
+    text-align: center;
+    color: #444;
+}
+
+/* button */
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    background: linear-gradient(135deg, #ff6f91, #ff8fab);
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(255,105,135,0.4);
+}
+
+/* 💖 hearts from bottom */
+.heart {
+    position: absolute;
+    bottom: -20px;
+    font-size: 16px;
+    animation: floatUp linear forwards;
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 0;
+    }
+    20% { opacity: 1; }
+    100% {
+        transform: translateY(-100vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* open animation */
+.open .flap {
+    transform: rotateX(180deg);
+}
+
+.open .letter {
+    transform: translateY(-180px) scale(1);
+    opacity: 1;
+}
+
+.open .envelope {
+    transform: translateY(220px) scale(0.6);
+    opacity: 0;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎬 cinematic intro -->
+<div class="intro">
+    <div class="intro-text">A Small Message For You…</div>
+</div>
+
+<div class="spotlight"></div>
+
+<div class="container" onclick="openLetter()">
+    <div class="envelope">
+        <div class="flap"></div>
+    </div>
+
+    <div class="letter">
+        <h2>I'm Sorry 💖</h2>
+        <p>
+            I didn’t mean to hurt you…<br><br>
+            You matter to me more than I can explain.<br><br>
+            I just want to fix things and see you smile again…<br><br>
+            Please forgive me? 💕
+        </p>
+        <button>Forgive Me 🫶</button>
+    </div>
+</div>
+
+<script>
+function openLetter() {
+    document.querySelector(".container").classList.add("open");
+
+    for(let i=0;i<15;i++){
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+
+        heart.style.left = Math.random()*100 + "vw";
+        heart.style.animationDuration = (Math.random()*2 + 4) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>heart.remove(),6000);
+    }
+}
+</script>
+
+</body>
+</html>
