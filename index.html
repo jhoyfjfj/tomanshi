@@ -15,26 +15,18 @@
     box-sizing: border-box;
 }
 
+/* ✅ FIXED BODY (clean + background working) */
 body {
-    height: 100vh;
-  body {
     min-height: 100svh;
-    margin: 0;
 
     background:
         linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-        url("background.jpg.jpeg");
+        url("background.jpg.jpeg"); /* make sure file name is correct */
 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    font-family: 'Quicksand', sans-serif;
-}
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,7 +73,7 @@ body {
     position: absolute;
     width: clamp(250px, 60vw, 400px);
     height: clamp(250px, 60vw, 400px);
-    background: radial-gradient(circle, rgba(255,255,255,0.4), transparent 70%);
+    background: radial-gradient(circle, rgba(255,255,255,0.35), transparent 70%);
     border-radius: 50%;
     filter: blur(40px);
     animation: moveLight 6s infinite alternate ease-in-out;
@@ -153,7 +145,7 @@ body {
     font-size: clamp(13px, 3.5vw, 15px);
     line-height: 1.7;
     text-align: center;
-    color: #444;
+    color: #fff; /* better contrast on dark bg */
 }
 
 /* button */
@@ -177,7 +169,7 @@ button:hover {
     box-shadow: 0 10px 20px rgba(255,105,135,0.4);
 }
 
-/* 💖 hearts from bottom */
+/* 💖 hearts */
 .heart {
     position: absolute;
     bottom: -20px;
@@ -213,7 +205,7 @@ button:hover {
     opacity: 0;
 }
 
-/* mobile fine tuning */
+/* mobile tuning */
 @media (max-width: 480px) {
     .open .letter {
         transform: translate(-50%, -130px) scale(1);
@@ -228,14 +220,13 @@ button:hover {
 
 <body>
 
-<!-- 🎬 intro -->
 <div class="intro">
     <div class="intro-text">A Small Message For You…</div>
 </div>
 
 <div class="spotlight"></div>
 
-<div class="container" onclick="openLetter()">
+<div class="container" ontouchstart="openLetter()" onclick="openLetter()">
     <div class="envelope">
         <div class="flap"></div>
     </div>
@@ -247,7 +238,7 @@ button:hover {
             You matter to me more than I can explain.<br><br>
             I just want to fix things and see you smile again…<br><br>
         </p>
-        <button>Forgive Me 🐘🫶</button>
+        <button>Forgive Me 🫶</button>
     </div>
 </div>
 
