@@ -15,13 +15,13 @@
     box-sizing: border-box;
 }
 
-/* ✅ FIXED BODY (clean + background working) */
+/* ✅ BACKGROUND FIXED */
 body {
     min-height: 100svh;
 
     background:
         linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-        url("background.jpg"); /* make sure file name is correct */
+        url("background.jpg"); /* make sure correct name */
 
     background-size: cover;
     background-position: center;
@@ -88,7 +88,6 @@ body {
 .container {
     position: relative;
     perspective: 1200px;
-    transform: scale(clamp(0.85, 2vw, 1));
 }
 
 /* envelope */
@@ -122,7 +121,7 @@ body {
     width: clamp(240px, 85vw, 290px);
     min-height: 340px;
     background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(10px);
     border-radius: 18px;
     padding: 20px;
     top: 20px;
@@ -133,11 +132,13 @@ body {
     transition: 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* ✅ TEXT FIXED */
 .letter h2 {
     font-family: 'Pacifico', cursive;
     text-align: center;
     font-size: clamp(22px, 5vw, 32px);
     color: #ff4d6d;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     margin-bottom: 15px;
 }
 
@@ -146,9 +147,9 @@ body {
     line-height: 1.7;
     text-align: center;
 
-    color: #333;
+    color: #333 !important;
 
-    background: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.75);
     padding: 10px;
     border-radius: 10px;
 }
@@ -166,15 +167,9 @@ button {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    transition: 0.3s;
 }
 
-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 10px 20px rgba(255,105,135,0.4);
-}
-
-/* 💖 hearts */
+/* hearts */
 .heart {
     position: absolute;
     bottom: -20px;
@@ -184,15 +179,8 @@ button:hover {
 }
 
 @keyframes floatUp {
-    0% {
-        transform: translateY(0) scale(0.8);
-        opacity: 0;
-    }
-    20% { opacity: 1; }
-    100% {
-        transform: translateY(-100vh) scale(1.2);
-        opacity: 0;
-    }
+    0% {opacity:0; transform: translateY(0);}
+    100% {opacity:1; transform: translateY(-100vh);}
 }
 
 /* open animation */
@@ -201,24 +189,13 @@ button:hover {
 }
 
 .open .letter {
-    transform: translate(-50%, -150px) scale(1);
+    transform: translate(-50%, -140px) scale(1);
     opacity: 1;
 }
 
 .open .envelope {
-    transform: translateY(180px) scale(0.6);
+    transform: translateY(160px) scale(0.6);
     opacity: 0;
-}
-
-/* mobile tuning */
-@media (max-width: 480px) {
-    .open .letter {
-        transform: translate(-50%, -130px) scale(1);
-    }
-
-    .open .envelope {
-        transform: translateY(150px) scale(0.5);
-    }
 }
 </style>
 </head>
@@ -231,7 +208,7 @@ button:hover {
 
 <div class="spotlight"></div>
 
-<div class="container" ontouchstart="openLetter()" onclick="openLetter()">
+<div class="container" onclick="openLetter()">
     <div class="envelope">
         <div class="flap"></div>
     </div>
@@ -255,12 +232,9 @@ function openLetter() {
         let heart = document.createElement("div");
         heart.className = "heart";
         heart.innerHTML = "❤️";
-
         heart.style.left = Math.random()*100 + "vw";
         heart.style.animationDuration = (Math.random()*2 + 4) + "s";
-
         document.body.appendChild(heart);
-
         setTimeout(()=>heart.remove(),6000);
     }
 }
