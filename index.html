@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Cinematic Apology</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
 
@@ -38,10 +40,11 @@ body {
 
 .intro-text {
     color: white;
-    font-size: 28px;
+    font-size: clamp(20px, 5vw, 28px);
     letter-spacing: 3px;
     opacity: 0;
     animation: textReveal 3s forwards;
+    text-align: center;
 }
 
 @keyframes textReveal {
@@ -59,8 +62,8 @@ body {
 /* spotlight */
 .spotlight {
     position: absolute;
-    width: 400px;
-    height: 400px;
+    width: clamp(250px, 60vw, 400px);
+    height: clamp(250px, 60vw, 400px);
     background: radial-gradient(circle, rgba(255,255,255,0.4), transparent 70%);
     border-radius: 50%;
     filter: blur(40px);
@@ -76,12 +79,13 @@ body {
 .container {
     position: relative;
     perspective: 1200px;
+    transform: scale(clamp(0.85, 2vw, 1));
 }
 
 /* envelope */
 .envelope {
-    width: 260px;
-    height: 170px;
+    width: clamp(200px, 60vw, 260px);
+    height: clamp(130px, 40vw, 170px);
     background: linear-gradient(145deg, #ffffff, #f3f3f3);
     border-radius: 14px;
     position: relative;
@@ -106,16 +110,16 @@ body {
 /* letter */
 .letter {
     position: absolute;
-    width: 290px;
-    height: 380px;
+    width: clamp(240px, 85vw, 290px);
+    min-height: 340px;
     background: rgba(255,255,255,0.95);
     backdrop-filter: blur(12px);
     border-radius: 18px;
-    padding: 25px;
+    padding: 20px;
     top: 20px;
-    left: -15px;
+    left: 50%;
+    transform: translate(-50%, 120px) scale(0.85);
     box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-    transform: translateY(120px) scale(0.85);
     opacity: 0;
     transition: 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -123,13 +127,13 @@ body {
 .letter h2 {
     font-family: 'Pacifico', cursive;
     text-align: center;
-    font-size: 32px;
+    font-size: clamp(22px, 5vw, 32px);
     color: #ff4d6d;
     margin-bottom: 15px;
 }
 
 .letter p {
-    font-size: 15px;
+    font-size: clamp(13px, 3.5vw, 15px);
     line-height: 1.7;
     text-align: center;
     color: #444;
@@ -138,13 +142,13 @@ body {
 /* button */
 button {
     margin-top: 20px;
-    padding: 12px 25px;
+    padding: 14px 28px;
     border: none;
     background: linear-gradient(135deg, #ff6f91, #ff8fab);
     color: white;
     border-radius: 30px;
     cursor: pointer;
-    font-size: 15px;
+    font-size: clamp(14px, 4vw, 16px);
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -183,20 +187,31 @@ button:hover {
 }
 
 .open .letter {
-    transform: translateY(-180px) scale(1);
+    transform: translate(-50%, -150px) scale(1);
     opacity: 1;
 }
 
 .open .envelope {
-    transform: translateY(220px) scale(0.6);
+    transform: translateY(180px) scale(0.6);
     opacity: 0;
+}
+
+/* mobile fine tuning */
+@media (max-width: 480px) {
+    .open .letter {
+        transform: translate(-50%, -130px) scale(1);
+    }
+
+    .open .envelope {
+        transform: translateY(150px) scale(0.5);
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎬 cinematic intro -->
+<!-- 🎬 intro -->
 <div class="intro">
     <div class="intro-text">A Small Message For You…</div>
 </div>
@@ -209,7 +224,7 @@ button:hover {
     </div>
 
     <div class="letter">
-        <h2>I'm Sorry 💖</h2>
+        <h2>I'm Sorry 🥺💖</h2>
         <p>
             I didn’t mean to hurt you…<br><br>
             You matter to me more than I can explain.<br><br>
@@ -227,7 +242,7 @@ function openLetter() {
     for(let i=0;i<15;i++){
         let heart = document.createElement("div");
         heart.className = "heart";
-        heart.innerHTML = "❤️";
+        heart.innerHTML = "💖";
 
         heart.style.left = Math.random()*100 + "vw";
         heart.style.animationDuration = (Math.random()*2 + 4) + "s";
